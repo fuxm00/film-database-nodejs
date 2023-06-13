@@ -1,0 +1,20 @@
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Year</th>
+        <th>UserId</th>
+        <th>FilmId</th>
+
+    </tr>
+
+    <% for (const film of toWatchFilms) { %>
+        <tr>
+            <td><%= film.title %></td>
+            <td><%= film.year %></td>
+            <td><%= film.userId %></td>
+            <td><%= film.id %></td>
+            <td><a href="/remove-from-to-watch/<%= film.id %>">👀</a></td>
+            <td><a href="/watched/<%= film.id %>">✅</a></td>
+        </tr>
+    <% } %>
+</table>

@@ -1,0 +1,17 @@
+<%- include('_header') %>
+
+<a href='/'>Úvodní obrazovka</a>
+<a href='/register'>Registrace</a>
+
+<hr>
+
+<form action='/login' method='post'>
+    <input type='text' name='name' placeholder='Jméno'><br>
+    <input type='password' name='password' placeholder='Heslo'><br><br>
+    <button type='submit'>Přihlásit se</button>
+</form>
+
+<%- include('_error') %>
+
+</body>
+</html>

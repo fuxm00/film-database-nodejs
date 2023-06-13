@@ -1,0 +1,25 @@
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Year</th>
+        <th>UserId</th>
+        <th>FilmId</th>
+
+    </tr>
+
+    <% for (const film of watchedFilms) { %>
+        <tr>
+            <td><%= film.title %></td>
+            <td><%= film.year %></td>
+            <td><%= film.userId %></td>
+            <td><%= film.id %></td>
+
+            <% if (!film.favourite) { %>
+                <td><a href="/favourites/<%= film.id %>">🤍</a></td>
+            <% } else { %>
+                <td><a href="/remove-favourite/<%= film.id %>">🧡</a></td>
+            <% } %>
+
+        </tr>
+    <% } %>
+</table>

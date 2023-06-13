@@ -1,0 +1,18 @@
+<%- include('_header') %>
+
+<a href='/'>Úvodní obrazovka</a>
+<a href='/login'>Přihlášení</a>
+
+<hr>
+
+<form action="/register" method="post">
+    <input type="text" name="name" placeholder="Jméno" /><br>
+    <input type="password" name="password" placeholder="Heslo" /><br><br>
+    <button type="submit">Registrovat se</button>
+</form>
+
+<% if (typeof error !== 'undefined') { %>
+    <div><%= error %></div>
+<% } %>
+</body>
+</html>
