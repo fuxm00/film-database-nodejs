@@ -2,17 +2,12 @@
     <tr>
         <th>Title</th>
         <th>Year</th>
-        <th>UserId</th>
-        <th>FilmId</th>
-
     </tr>
 
     <% for (const film of films) { %>
         <tr>
             <td><%= film.title %></td>
             <td><%= film.year %></td>
-            <td><%= film.userId %></td>
-            <td><%= film.id %></td>
 
             <% if (!film.favourite) { %>
                 <td><a href="/favourites/<%= film.id %>">🤍</a></td>

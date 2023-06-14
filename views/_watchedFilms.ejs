@@ -2,19 +2,19 @@
     <tr>
         <th>Title</th>
         <th>Year</th>
-        <th>UserId</th>
-        <th>FilmId</th>
-        <th>Watched</th>
-
+        <th>Seen Times</th>
+        <th>Last Seen</th>
+        <th>Favourites</th>
+        <th>Seen</th>
+        <th>Rating</th>
     </tr>
 
     <% for (const film of watchedFilms) { %>
         <tr>
             <td><%= film.title %></td>
             <td><%= film.year %></td>
-            <td><%= film.userId %></td>
-            <td><%= film.id %></td>
             <td><%= film.count %></td>
+            <td><%= film.last_seen %></td>
 
             <% if (!film.favourite) { %>
                 <td><a href="/favourites/<%= film.id %>">🤍</a></td>
@@ -24,39 +24,42 @@
 
             <td><a href="/watched/<%= film.id %>">✔</a></td>
 
-            <td><a href="/rated/<%= film.id %>/5">
+            <td>
+                <a href="/rated/<%= film.id %>/5">
                     <% if (film.rating > 4) { %>
                         ⭐
                     <% } else { %>
                         ⚪
-                    <% } %></a></td>
-            <td><a href="/rated/<%= film.id %>/4">
+                    <% } %>
+                </a>
+                <a href="/rated/<%= film.id %>/4">
                     <% if (film.rating > 3) { %>
                         ⭐
                     <% } else { %>
                         ⚪
-                    <% } %></a></td>
-            <td><a href="/rated/<%= film.id %>/3">
+                    <% } %>
+                </a>
+                <a href="/rated/<%= film.id %>/3">
                     <% if (film.rating > 2) { %>
                         ⭐
                     <% } else { %>
                         ⚪
-                    <% } %></a></td>
-            <td><a href="/rated/<%= film.id %>/2">
+                    <% } %>
+                </a>
+                <a href="/rated/<%= film.id %>/2">
                     <% if (film.rating > 1) { %>
                         ⭐
                     <% } else { %>
                         ⚪
-                    <% } %></a></td>
-            <td><a href="/rated/<%= film.id %>/1">
+                    <% } %>
+                </a>
+                <a href="/rated/<%= film.id %>/1">
                     <% if (film.rating > 0) { %>
                         ⭐
                     <% } else { %>
                         ⚪
-                    <% } %></a></td>
-
-            <td><%= film.rating %></td>
-
+                    <% } %>
+                </a></td>
         </tr>
     <% } %>
 </table>

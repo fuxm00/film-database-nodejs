@@ -1,4 +1,5 @@
 import db from "../db.js";
+import {currentDate} from "../utils/date.js";
 
 export const increaseFilmWatchCounterByIdAndUser = async (userId, filmId) => {
 
@@ -6,14 +7,14 @@ export const increaseFilmWatchCounterByIdAndUser = async (userId, filmId) => {
 
     if (count >= 1) {
         count++
-        await db('watched').update({count})
+        await db('watched').update({count: count, last_seen: currentDate()})
             .where(function () {
                 this
                     .where('userId', userId)
                     .andWhere('filmId', filmId)
             })
     } else {
-        await db('watched').insert({userId: userId, filmId: filmId, count: 1})
+        await db('watched').insert({userId: userId, filmId: filmId, count: 1, last_seen: currentDate()})
     }
 }
 
