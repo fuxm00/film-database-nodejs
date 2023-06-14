@@ -2,7 +2,6 @@ import express from "express";
 import {
     createFilm,
     getFilmById,
-    getFilmsByUser,
 } from "../db/films.js";
 import {
     addFavouritesFilm,
@@ -16,18 +15,9 @@ import {
     removeToWatchFilm
 } from "../db/toWatch.js";
 import {getWatchedByUser, increaseFilmWatchCounterByIdAndUser} from "../db/Watched.js";
+import {setRatingByUserAndFilm} from "../db/rating.js";
 
 const films = express.Router()
-
-//TODO
-films.get('/films', async (req, res) => {
-    const films = await getFilmsByUser(res.locals.user.id)
-
-    res.render('films', {
-        title: 'Films',
-        films,
-    })
-})
 
 films.post('/add', async (req, res) => {
     const title = String(req.body.title)
@@ -85,6 +75,8 @@ films.get('/to-watch', async (req, res) => {
     const toWatchFilms = await getToWatchByUser(res.locals.user.id)
     const watchedFilms = await getWatchedByUser(res.locals.user.id)
 
+    console.log(watchedFilms)
+
     const user = res.locals.user
 
     for (const film of watchedFilms) {
@@ -139,5 +131,21 @@ films.get('/watched/:id', async (req, res, next) => {
 
     res.redirect('back')
 })
+
+films.get('/rated/:id/:rating', async (req, res, next) => {
+    const filmId = Number(req.params.id)
+    const rating = Number(req.params.rating)
+
+    const film = await getFilmById(filmId)
+
+    if (!film) return next()
+
+    const userId = res.locals.user.id
+
+    await setRatingByUserAndFilm(userId, filmId, rating)
+
+    res.redirect('back')
+})
+
 
 export default films
