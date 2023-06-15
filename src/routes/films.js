@@ -86,13 +86,14 @@ films.get('/remove-favourite/:id', async (req, res, next) => {
 })
 
 films.get('/to-watch', async (req, res) => {
-    const toWatchFilms = await getToWatchByUser(res.locals.user.id)
-    const watchedFilms = await getWatchedByUser(res.locals.user.id)
-
     const user = res.locals.user
+    const userId = user.id
+
+    const toWatchFilms = await getToWatchByUser(userId)
+    const watchedFilms = await getWatchedByUser(userId)
 
     for (const film of watchedFilms) {
-        const favouriteFilm = await getFavouriteByIdAndUser(user.id, film.id)
+        const favouriteFilm = await getFavouriteByIdAndUser(userId, film.id)
         film.favourite = !!favouriteFilm;
     }
 
@@ -121,7 +122,7 @@ films.get('/remove-from-to-watch/:id', async (req, res, next) => {
     const filmId = Number(req.params.id)
     const userId = res.locals.user.id
 
-    const toWatch = await getToWatchByUser(userId, filmId)
+    const toWatch = await getToWatchByUser(userId)
 
     if (!toWatch) return next()
 

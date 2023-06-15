@@ -1,19 +1,28 @@
 import db from '../db.js'
+import {getCounterByIdAndUser} from "./Watched.js";
 
 export const getToWatchByUser = async (id) => {
-    const query = db('toWatch').select('*')
+    const query = db('toWatch')
+        .select('toWatch.userId', 'films.title', 'films.year', 'films.id')
         .where(function () {
             this
-                .whereNull('watched.count')
-                .andWhere('toWatch.userId', id)
+                .where('toWatch.userId', id)
         })
-        .leftJoin('films', 'toWatch.filmId', 'films.id')
-        .leftJoin('watched', 'toWatch.filmId', 'watched.filmId')
-
+        .join('films', 'toWatch.filmId', 'films.id')
 
     const toWatch = await query
 
-    return toWatch
+    let notSeenToWatch = Array()
+
+    for (const film of toWatch) {
+        if (!await getCounterByIdAndUser(id, film.id)) {
+            notSeenToWatch.push(film)
+        }
+    }
+
+    console.log(toWatch)
+
+    return notSeenToWatch
 }
 
 export const getToWatchByIdAndUser = async (userId, filmId) => {
