@@ -53,7 +53,7 @@ router.post('/login', async (req, res) => {
 
 router.get('/logout', (req, res) => {
     res.cookie('token', undefined)
-    res.redirect('back')
+    res.redirect('/')
 })
 
 export default router

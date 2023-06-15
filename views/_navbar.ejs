@@ -1,3 +1,5 @@
-<a href="/">Právě letí</a>
-<a href="/favourites">Oblíbené</a>
-<a href="/to-watch">Ke zhlédnutí</a>
+<div id="navbar-container">
+    <a href="/" class="navbar-item <%= marked === "films" ? "marked" : ""%>">Právě letí</a>
+    <a href="/favourites" class="navbar-item <%= marked === "favourites" ? "marked" : ""%>">Oblíbené</a>
+    <a href="/to-watch" class="navbar-item <%= marked === "toWatch" ? "marked" : ""%>">Ke zhlédnutí</a>
+</div>

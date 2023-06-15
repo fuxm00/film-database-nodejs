@@ -20,29 +20,23 @@ app.use(loadUser)
 app.get('/', async (req, res) => {
 
     const user = res.locals.user
+    const films = await getAllFilms()
 
-    if (user == null) {
-        res.render('index', {
-            title: 'MSFD.cz'
-        })
-    } else {
-
-        const films = await getAllFilms()
-
+    if (user) {
         for (const film of films) {
             const favouriteFilm = await getFavouriteByIdAndUser(user.id, film.id)
             const watchedFilm = await getToWatchByIdAndUser(user.id, film.id)
 
             film.favourite = !!favouriteFilm;
             film.toWatch = !!watchedFilm;
-
         }
-
-        res.render('films', {
-            title: 'Films',
-            films,
-        })
     }
+
+    res.render('films', {
+        title: 'Films',
+        films,
+        marked: 'films'
+    })
 
 
 })

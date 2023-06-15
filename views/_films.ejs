@@ -1,28 +1,31 @@
-<table>
-    <tr>
-        <th>Cover</th>
-        <th>Title</th>
-        <th>Year</th>
-    </tr>
-
+<div class="film-list">
     <% for (const film of films) { %>
-        <tr>
-            <td><img src="/film_covers/<%= film.id %>.jpg"></td>
-            <td><%= film.title %></td>
-            <td><%= film.year %></td>
+        <div class="film-card">
 
-            <% if (!film.favourite) { %>
-                <td><a href="/favourites/<%= film.id %>">🤍</a></td>
-            <% } else { %>
-                <td><a href="/remove-favourite/<%= film.id %>">🧡</a></td>
+            <div>
+                <%= film.title %>
+                (<%= film.year %>)
+            </div>
+
+            <img src="/film_covers/<%= film.id %>.jpg" class="film-cover">
+
+            <% if (user) { %>
+
+                <div>
+                    <% if (!film.favourite) { %>
+                        <a href="/favourites/<%= film.id %>">🤍</a>
+                    <% } else { %>
+                        <a href="/remove-favourite/<%= film.id %>">🧡</a>
+                    <% } %>
+
+                    <% if (!film.toWatch) { %>
+                        <a href="/add-to-watch/<%= film.id %>">⬜</a>
+                    <% } else { %>
+                        <a href="/remove-from-to-watch/<%= film.id %>">👀</a>
+                    <% } %>
+                </div>
             <% } %>
-
-            <% if (!film.toWatch) { %>
-                <td><a href="/add-to-watch/<%= film.id %>">⬜</a></td>
-            <% } else { %>
-                <td><a href="/remove-from-to-watch/<%= film.id %>">👀</a></td>
-            <% } %>
-
-        </tr>
+        </div>
     <% } %>
-</table>
+</div>
+

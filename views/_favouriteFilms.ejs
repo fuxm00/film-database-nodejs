@@ -1,14 +1,22 @@
-<table>
-    <tr>
-        <th>Title</th>
-        <th>Year</th>
-    </tr>
+<% for (const film of films) { %>
+    <hr>
+    <div class="film-container">
 
-    <% for (const film of films) { %>
-        <tr>
-            <td><%= film.title %></td>
-            <td><%= film.year %></td>
-            <td><a href="/remove-favourite/<%= film.id %>">🧡</a></td>
-        </tr>
-    <% } %>
-</table>
+        <img src="/film_covers/<%= film.id %>.jpg" class="film-cover">
+
+        <div class="film-details">
+
+            <div>
+                <a href="/remove-favourite/<%= film.id %>">🧡</a>
+            </div>
+
+            <div class="ml-30"><%= film.title %></div>
+
+            <div class="ml-30">(<%= film.year %>)</div>
+
+        </div>
+    </div>
+
+<% } %>
+
+

@@ -34,13 +34,23 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage})
 
 films.post('/add', upload.single('image'), async (req, res) => {
+    const user = res.locals.user
+
+    if (!user) {
+        res.render('login', {
+            title: 'Přihlášení',
+        })
+        return
+    }
+
     const title = String(req.body.title)
     const year = String(req.body.year)
-    const userId = res.locals.user.id
 
-    if (!userId) {
+    if (!user) {
         res.redirect('/')
     }
+
+    const userId = user.id
 
     await createFilm(
         {title, year, userId},
@@ -64,11 +74,22 @@ films.get('/favourites/:id', async (req, res, next) => {
 })
 
 films.get('/favourites', async (req, res) => {
-    const films = await getFavouritesByUser(res.locals.user.id)
+
+    const user = res.locals.user
+
+    if (!user) {
+        res.render('login', {
+            title: 'Přihlášení',
+        })
+        return
+    }
+
+    const films = await getFavouritesByUser(user.id)
 
     res.render('favourites', {
         title: 'Favourites',
         films,
+        marked: 'favourites'
     })
 })
 
@@ -87,6 +108,14 @@ films.get('/remove-favourite/:id', async (req, res, next) => {
 
 films.get('/to-watch', async (req, res) => {
     const user = res.locals.user
+
+    if (!user) {
+        res.render('login', {
+            title: 'Přihlášení',
+        })
+        return
+    }
+
     const userId = user.id
 
     const toWatchFilms = await getToWatchByUser(userId)
@@ -100,7 +129,8 @@ films.get('/to-watch', async (req, res) => {
     res.render('toWatch', {
         title: 'Ke zhlédnutí',
         toWatchFilms,
-        watchedFilms
+        watchedFilms,
+        marked: 'toWatch'
     })
 })
 

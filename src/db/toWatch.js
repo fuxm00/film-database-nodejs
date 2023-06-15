@@ -20,8 +20,6 @@ export const getToWatchByUser = async (id) => {
         }
     }
 
-    console.log(toWatch)
-
     return notSeenToWatch
 }
 

@@ -1,17 +1,38 @@
 <%- include('_header') %>
-
-<a href="/logout">Odhlásit</a>
-<hr>
 <%- include('_navbar') %>
-<hr>
-<div id="films"><%- include('_films') %></div>
 
-<form action="/add" method="post" enctype="multipart/form-data">
-    <input type="file" name="image"><br>
-    <input type="text" name="title" placeholder="Název"/><br>
-    <input type="text" name="year" placeholder="Rok"/><br><br>
-    <button type="submit">Přidat Film</button>
+<h2>Rozšiř naší filmotéku</h2>
+
+<form action="/add" method="post" enctype="multipart/form-data" class="film-add-form">
+
+    <div>
+        <label>
+            Náhled filmu
+            <input type="file" name="image">
+        </label>
+    </div>
+
+    <div>
+        <label>
+            Název filmu
+            <input type="text" name="title" placeholder="Název"/>
+        </label>
+    </div>
+
+    <div>
+        <label>
+            Rok vydání
+            <input type="text" name="year" placeholder="Rok"/>
+        </label>
+    </div>
+
+    <div class="margin-top-auto">
+        <button type="submit" class="button">Přidat</button>
+    </div>
+
 </form>
 
-</body>
-</html>
+<h2>Co by se ti mohlo líbit</h2>
+<div id="films"><%- include('_films') %></div>
+
+<%- include('_footer') %>

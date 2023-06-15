@@ -1,18 +1,32 @@
 <%- include('_header') %>
 
-<a href='/'>Úvodní obrazovka</a>
-<a href='/login'>Přihlášení</a>
+<div class="flex-column-center">
+    <h2>Registrace</h2>
 
-<hr>
+    <form action="/register" method='post' class="flex-column-center">
+        <div>
+            <label>
+                Tvoje nová přezdívka
+                <br>
+                <input type='text' name='name' placeholder='Přezdívka'>
+            </label>
+            <br><br>
+        </div>
 
-<form action="/register" method="post">
-    <input type="text" name="name" placeholder="Jméno" /><br>
-    <input type="password" name="password" placeholder="Heslo" /><br><br>
-    <button type="submit">Registrovat se</button>
-</form>
+        <div>
+            <label>
+                Tvoje nové heslo
+                <br>
+                <input type='password' name='password' placeholder='Heslo'>
+            </label>
+            <br><br>
+        </div>
 
-<% if (typeof error !== 'undefined') { %>
-    <div><%= error %></div>
-<% } %>
-</body>
-</html>
+        <button type='submit' class="button">Přihlásit se</button>
+    </form>
+
+    <%- include('_error') %>
+</div>
+
+
+<%- include('_footer') %>
