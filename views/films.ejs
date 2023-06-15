@@ -6,7 +6,8 @@
 <hr>
 <div id="films"><%- include('_films') %></div>
 
-<form action="/add" method="post">
+<form action="/add" method="post" enctype="multipart/form-data">
+    <input type="file" name="image"><br>
     <input type="text" name="title" placeholder="Název"/><br>
     <input type="text" name="year" placeholder="Rok"/><br><br>
     <button type="submit">Přidat Film</button>

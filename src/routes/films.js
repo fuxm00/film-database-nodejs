@@ -1,7 +1,7 @@
 import express from "express";
 import {
     createFilm,
-    getFilmById,
+    getFilmById, getNextFilmId,
 } from "../db/films.js";
 import {
     addFavouritesFilm,
@@ -16,10 +16,24 @@ import {
 } from "../db/toWatch.js";
 import {getWatchedByUser, increaseFilmWatchCounterByIdAndUser} from "../db/Watched.js";
 import {setRatingByUserAndFilm} from "../db/rating.js";
+import multer from "multer";
+import * as path from "path";
 
 const films = express.Router()
 
-films.post('/add', async (req, res) => {
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './public/film_covers')
+    },
+    filename: async function (req, file, cb) {
+        const extension = path.extname(file.originalname)
+        cb(null, await getNextFilmId() + extension)
+    }
+})
+
+const upload = multer({storage: storage})
+
+films.post('/add', upload.single('image'), async (req, res) => {
     const title = String(req.body.title)
     const year = String(req.body.year)
     const userId = res.locals.user.id
@@ -74,8 +88,6 @@ films.get('/remove-favourite/:id', async (req, res, next) => {
 films.get('/to-watch', async (req, res) => {
     const toWatchFilms = await getToWatchByUser(res.locals.user.id)
     const watchedFilms = await getWatchedByUser(res.locals.user.id)
-
-    console.log(watchedFilms)
 
     const user = res.locals.user
 

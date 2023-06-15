@@ -1,11 +1,13 @@
 <table>
     <tr>
+        <th>Cover</th>
         <th>Title</th>
         <th>Year</th>
     </tr>
 
     <% for (const film of films) { %>
         <tr>
+            <td><img src="/film_covers/<%= film.id %>.jpg"></td>
             <td><%= film.title %></td>
             <td><%= film.year %></td>
 
