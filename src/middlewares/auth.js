@@ -1,7 +1,7 @@
 export default (req, res, next) => {
-    if (res.locals.users) {
+    if (res.locals.user) {
         next()
     } else {
-        res.redirect('/register')
+        res.redirect('/login')
     }
 }

@@ -4,26 +4,18 @@ import {getFavouriteByIdAndUser} from "../db/favourites.js";
 import {getFilmById} from "../db/films.js";
 import films from "./films.js";
 import express from "express";
+import auth from "../middlewares/auth.js";
 
 const toWatchFilms = express.Router()
 
-films.get('/to-watch', async (req, res) => {
+films.get('/to-watch', auth, async (req, res) => {
     const user = res.locals.user
 
-    if (!user) {
-        res.render('login', {
-            title: 'Přihlášení',
-        })
-        return
-    }
-
-    const userId = user.id
-
-    const toWatchFilms = await getToWatchByUser(userId)
-    const watchedFilms = await getWatchedByUser(userId)
+    const toWatchFilms = await getToWatchByUser(user.id)
+    const watchedFilms = await getWatchedByUser(user.id)
 
     for (const film of watchedFilms) {
-        const favouriteFilm = await getFavouriteByIdAndUser(userId, film.id)
+        const favouriteFilm = await getFavouriteByIdAndUser(user.id, film.id)
         film.favourite = !!favouriteFilm;
     }
 
@@ -35,29 +27,30 @@ films.get('/to-watch', async (req, res) => {
     })
 })
 
-films.get('/add-to-watch/:id', async (req, res, next) => {
+films.get('/add-to-watch/:id', auth, async (req, res, next) => {
     const filmId = Number(req.params.id)
-
     const film = await getFilmById(filmId)
-
     if (!film) return next()
 
-    const userId = res.locals.user.id
+    const user = res.locals.user
 
-    await addToWatchFilm(userId, filmId)
+    await addToWatchFilm(user.id, filmId)
 
     res.redirect('back')
 })
 
-films.get('/remove-from-to-watch/:id', async (req, res, next) => {
+films.get('/remove-from-to-watch/:id', auth, async (req, res, next) => {
     const filmId = Number(req.params.id)
-    const userId = res.locals.user.id
+    const film = await getFilmById(filmId)
+    if (!film) return next()
 
-    const toWatch = await getToWatchByUser(userId)
+    const user = res.locals.user
+
+    const toWatch = await getToWatchByUser(user.id)
 
     if (!toWatch) return next()
 
-    await removeToWatchFilm(userId, filmId)
+    await removeToWatchFilm(user.id, filmId)
 
     res.redirect('back')
 })

@@ -7,19 +7,13 @@ import {
 import films from "./films.js";
 import {getFilmById} from "../db/films.js";
 import express from "express";
+import auth from "../middlewares/auth.js";
 
 const favFilms = express.Router()
 
-films.get('/favourites', async (req, res) => {
+films.get('/favourites', auth, async (req, res) => {
 
     const user = res.locals.user
-
-    if (!user) {
-        res.render('login', {
-            title: 'Přihlášení',
-        })
-        return
-    }
 
     const films = await getFavouritesByUser(user.id)
 
@@ -30,29 +24,31 @@ films.get('/favourites', async (req, res) => {
     })
 })
 
-films.get('/favourites/:id', async (req, res, next) => {
+films.get('/favourites/:id', auth, async (req, res, next) => {
     const filmId = Number(req.params.id)
-
     const film = await getFilmById(filmId)
-
     if (!film) return next()
 
-    const userId = res.locals.user.id
+    const user = res.locals.user
 
-    await addFavouritesFilm(userId, filmId)
+    await addFavouritesFilm(user.id, filmId)
 
     res.redirect('back')
 })
 
-films.get('/remove-favourite/:id', async (req, res, next) => {
+films.get('/remove-favourite/:id', auth, async (req, res, next) => {
     const filmId = Number(req.params.id)
-    const userId = res.locals.user.id
+    const film = await getFilmById(filmId)
 
-    const favourite = await getFavouriteByIdAndUser(userId, filmId)
+    if (!film) return next()
+
+    const user = res.locals.user
+
+    const favourite = await getFavouriteByIdAndUser(user.id, filmId)
 
     if (!favourite) return next()
 
-    await removeFavouriteFilm(userId, filmId)
+    await removeFavouriteFilm(user.id, filmId)
 
     res.redirect('back')
 })
