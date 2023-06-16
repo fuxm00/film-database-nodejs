@@ -2,7 +2,12 @@
 <%- include('_navbar') %>
 
 <h2>Tvé oblíbené filmy</h2>
-<div id="favourite-films"><%- include('_favouriteFilms') %></div>
+<% if (films.length >= 1) { %>
+    <div id="favourite-films" class="mb-40"><%- include('_favouriteFilms') %></div>
+<% } else { %>
+    <div class="ml-30">žádné</div>
+<% } %>
+
 
 <script>
     const ws = new WebSocket('ws://localhost:3000')

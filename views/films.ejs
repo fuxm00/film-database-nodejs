@@ -33,6 +33,11 @@
 </form>
 
 <h2>Co by se ti mohlo líbit</h2>
-<div id="films"><%- include('_films') %></div>
+<% if (films.length >= 1) { %>
+    <div id="films"><%- include('_films') %></div>
+<% } else { %>
+    <div class="ml-30">žádné</div>
+<% } %>
+
 
 <%- include('_footer') %>

@@ -2,10 +2,20 @@
 <%- include('_navbar') %>
 
 <h2>Chceš zhlédnout</h2>
-<div id="to-watch-films"><%- include('_toWatchFilms') %></div>
+<% if (toWatchFilms.length >= 1) { %>
+    <div id="to-watch-films"><%- include('_toWatchFilms') %></div>
+<% } else { %>
+    <div class="ml-30">žádné</div>
+<% } %>
+
 <hr>
 <h2>Již jsi zhlédl</h2>
-<div id="watched-films"><%- include('_watchedFilms') %></div>
+<% if (watchedFilms.length >= 1) { %>
+    <div id="watched-films" class="mb-40"><%- include('_watchedFilms') %></div>
+<% } else { %>
+    <div class="ml-30 mb-40">žádné</div>
+<% } %>
+
 
 
 <%- include('_footer') %>

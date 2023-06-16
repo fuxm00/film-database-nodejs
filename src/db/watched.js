@@ -37,7 +37,14 @@ export const getWatchedByUser = async (id) => {
                 .andWhere('watched.userId', id)
         })
         .leftJoin('watched', 'films.id', 'watched.filmId')
-        .leftJoin('rating', 'films.id', 'rating.filmId')
+        .leftJoin(
+            db('rating')
+                .select('*')
+                .where('userId', id)
+                .as('rating'),
+            'films.id',
+            'rating.filmId'
+        )
 
     const toWatch = await query
 

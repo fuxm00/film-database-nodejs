@@ -1,7 +1,11 @@
 import db from '../db.js'
 
-export const getAllFilms = async () => {
-    const query = db('films').select('*')
+export const getAllFilms = async (limit) => {
+    let query = db('films').select('*')
+
+    if (limit) {
+        query.limit(limit)
+    }
 
     const films = await query
 

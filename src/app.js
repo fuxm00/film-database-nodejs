@@ -25,9 +25,11 @@ app.get('/', async (req, res) => {
 
     const user = res.locals.user
     const films = await getAllFilms()
+    const filmsToShow =  films.slice(-8)
+    filmsToShow.sort((a, b) => parseFloat(b.id) - parseFloat(a.id));
 
     if (user) {
-        for (const film of films) {
+        for (const film of filmsToShow) {
             const favouriteFilm = await getFavouriteByIdAndUser(user.id, film.id)
             film.favourite = !!favouriteFilm;
 
@@ -42,11 +44,9 @@ app.get('/', async (req, res) => {
         }
     }
 
-    console.log(films)
-
     res.render('films', {
         title: 'Films',
-        films,
+        films: filmsToShow,
         marked: 'films'
     })
 
