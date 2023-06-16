@@ -13,6 +13,44 @@
                     <a href="/remove-favourite/<%= film.id %>">🧡</a>
                 <% } %>
 
+                <div class="ml-30">
+                    <a href="/rated/<%= film.id %>/5">
+                        <% if (film.rating > 4) { %>
+                            ⭐
+                        <% } else { %>
+                            ⚪
+                        <% } %>
+                    </a>
+                    <a href="/rated/<%= film.id %>/4">
+                        <% if (film.rating > 3) { %>
+                            ⭐
+                        <% } else { %>
+                            ⚪
+                        <% } %>
+                    </a>
+                    <a href="/rated/<%= film.id %>/3">
+                        <% if (film.rating > 2) { %>
+                            ⭐
+                        <% } else { %>
+                            ⚪
+                        <% } %>
+                    </a>
+                    <a href="/rated/<%= film.id %>/2">
+                        <% if (film.rating > 1) { %>
+                            ⭐
+                        <% } else { %>
+                            ⚪
+                        <% } %>
+                    </a>
+                    <a href="/rated/<%= film.id %>/1">
+                        <% if (film.rating > 0) { %>
+                            ⭐
+                        <% } else { %>
+                            ⚪
+                        <% } %>
+                    </a>
+                </div>
+
                 <div class="ml-30"><%= film.title %> (<%= film.year %>)</div>
 
                 <div class="ml-30">Viděno: <%= film.count %>x</div>
@@ -22,43 +60,6 @@
                 <div class="ml-30">Naposledy: <%= film.last_seen %></div>
             </div>
 
-            <div class="ml-30">
-                <a href="/rated/<%= film.id %>/5">
-                    <% if (film.rating > 4) { %>
-                        ⭐
-                    <% } else { %>
-                        ⚪
-                    <% } %>
-                </a>
-                <a href="/rated/<%= film.id %>/4">
-                    <% if (film.rating > 3) { %>
-                        ⭐
-                    <% } else { %>
-                        ⚪
-                    <% } %>
-                </a>
-                <a href="/rated/<%= film.id %>/3">
-                    <% if (film.rating > 2) { %>
-                        ⭐
-                    <% } else { %>
-                        ⚪
-                    <% } %>
-                </a>
-                <a href="/rated/<%= film.id %>/2">
-                    <% if (film.rating > 1) { %>
-                        ⭐
-                    <% } else { %>
-                        ⚪
-                    <% } %>
-                </a>
-                <a href="/rated/<%= film.id %>/1">
-                    <% if (film.rating > 0) { %>
-                        ⭐
-                    <% } else { %>
-                        ⚪
-                    <% } %>
-                </a>
-            </div>
 
         </div>
     </div>
