@@ -6,6 +6,9 @@ import loadUser from './middlewares/loadUser.js'
 import {getAllFilms} from "./db/films.js";
 import {getFavouriteByIdAndUser} from "./db/favourites.js";
 import {getToWatchByIdAndUser} from "./db/toWatch.js";
+import watchedFilms from "./routes/watchedFilms.js";
+import toWatchFilms from "./routes/toWatchFilms.js";
+import favFilms from "./routes/favFilms.js";
 
 export const app = express()
 
@@ -42,6 +45,9 @@ app.get('/', async (req, res) => {
 })
 
 app.use(films)
+app.use(favFilms)
+app.use(toWatchFilms)
+app.use(watchedFilms)
 app.use(users)
 
 app.use((req, res) => {
