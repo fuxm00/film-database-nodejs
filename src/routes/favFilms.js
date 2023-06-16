@@ -8,6 +8,7 @@ import films from "./films.js";
 import {getFilmById} from "../db/films.js";
 import express from "express";
 import auth from "../middlewares/auth.js";
+import {sendFavouriteFilmsToAll} from "../webSockets.js";
 
 const favFilms = express.Router()
 
@@ -32,6 +33,7 @@ films.get('/favourites/:id', auth, async (req, res, next) => {
     const user = res.locals.user
 
     await addFavouritesFilm(user.id, filmId)
+    sendFavouriteFilmsToAll(user.id)
 
     res.redirect('back')
 })
@@ -49,6 +51,8 @@ films.get('/remove-favourite/:id', auth, async (req, res, next) => {
     if (!favourite) return next()
 
     await removeFavouriteFilm(user.id, filmId)
+
+    sendFavouriteFilmsToAll(user.id)
 
     res.redirect('back')
 })

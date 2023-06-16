@@ -4,4 +4,16 @@
 <h2>Tvé oblíbené filmy</h2>
 <div id="favourite-films"><%- include('_favouriteFilms') %></div>
 
+<script>
+    const ws = new WebSocket('ws://localhost:3000')
+
+    ws.addEventListener('message', (message) => {
+        const json = JSON.parse(message.data)
+
+        if (json.type === 'favFilms') {
+            document.getElementById('favourite-films').innerHTML = json.html
+        }
+    })
+</script>
+
 <%- include('_footer') %>
