@@ -1,5 +1,5 @@
 import db from '../db.js'
-import {getCounterByIdAndUser} from "./Watched.js";
+import {getCounterByIdAndUser} from "./watched.js";
 
 export const getToWatchByUser = async (id) => {
     const query = db('toWatch')

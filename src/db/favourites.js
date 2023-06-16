@@ -18,6 +18,13 @@ export const getFavouriteByIdAndUser = async (userId, filmId) => {
     return film
 }
 
+export const getFavouritesByFilm = async (filmId) => {
+    const favourites = await db('favourites').select('*')
+        .where('filmId', filmId)
+
+    return favourites
+}
+
 export const addFavouritesFilm = async (userId, filmId) => {
     await db('favourites').insert({userId, filmId})
 }

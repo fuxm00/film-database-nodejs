@@ -119,6 +119,8 @@ body {
  .film-add-form {
      display: flex;
      justify-content: space-evenly;
+     margin-left: 30px;
+     margin-right: 30px;
  }
 
  .margin-top-auto {

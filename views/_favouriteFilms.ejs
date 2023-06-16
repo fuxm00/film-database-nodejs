@@ -14,6 +14,14 @@
 
             <div class="ml-30">(<%= film.year %>)</div>
 
+            <% if (film.favCount == 1) { %>
+                <div class="ml-30">Líbí se pouze tobě</div>
+            <% } else { %>
+                <div class="ml-30">Celkem se líbí <%= film.favCount %> uživatelům</div>
+            <% } %>
+
+
+
         </div>
     </div>
 

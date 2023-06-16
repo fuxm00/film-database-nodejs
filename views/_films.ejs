@@ -13,9 +13,9 @@
 
                 <div>
                     <% if (!film.favourite) { %>
-                        <a href="/favourites/<%= film.id %>">🤍</a>
+                        <%= film.favCount %>x <a href="/favourites/<%= film.id %>">🤍</a>
                     <% } else { %>
-                        <a href="/remove-favourite/<%= film.id %>">🧡</a>
+                            <%= film.favCount %>x <a href="/remove-favourite/<%= film.id %>">🧡</a>
                     <% } %>
                     <% if (!film.watched) { %>
                         <% if (!film.toWatch) { %>

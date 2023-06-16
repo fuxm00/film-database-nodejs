@@ -1,6 +1,6 @@
 import {
     addFavouritesFilm,
-    getFavouriteByIdAndUser,
+    getFavouriteByIdAndUser, getFavouritesByFilm,
     getFavouritesByUser,
     removeFavouriteFilm
 } from "../db/favourites.js";
@@ -17,6 +17,11 @@ films.get('/favourites', auth, async (req, res) => {
     const user = res.locals.user
 
     const films = await getFavouritesByUser(user.id)
+
+    for (const film of films) {
+        const favouriteFilms = await getFavouritesByFilm(film.id)
+        film.favCount = favouriteFilms.length;
+    }
 
     res.render('favourites', {
         title: 'Favourites',

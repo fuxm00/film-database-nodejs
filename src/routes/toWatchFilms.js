@@ -1,5 +1,5 @@
 import {addToWatchFilm, getToWatchByUser, removeToWatchFilm} from "../db/toWatch.js";
-import {getWatchedByUser} from "../db/Watched.js";
+import {getWatchedByUser} from "../db/watched.js";
 import {getFavouriteByIdAndUser} from "../db/favourites.js";
 import {getFilmById} from "../db/films.js";
 import films from "./films.js";

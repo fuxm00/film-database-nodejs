@@ -1,5 +1,5 @@
 import {getFilmById} from "../db/films.js";
-import {increaseFilmWatchCounterByIdAndUser} from "../db/Watched.js";
+import {increaseFilmWatchCounterByIdAndUser} from "../db/watched.js";
 import {setRatingByUserAndFilm} from "../db/rating.js";
 import films from "./films.js";
 import express from "express";
