@@ -17,12 +17,14 @@
                     <% } else { %>
                         <a href="/remove-favourite/<%= film.id %>">🧡</a>
                     <% } %>
-
-                    <% if (!film.toWatch) { %>
-                        <a href="/add-to-watch/<%= film.id %>">⬜</a>
-                    <% } else { %>
-                        <a href="/remove-from-to-watch/<%= film.id %>">👀</a>
+                    <% if (!film.watched) { %>
+                        <% if (!film.toWatch) { %>
+                            <a href="/add-to-watch/<%= film.id %>">⬜</a>
+                        <% } else { %>
+                            <a href="/remove-from-to-watch/<%= film.id %>">👀</a>
+                        <% } %>
                     <% } %>
+
                 </div>
             <% } %>
         </div>

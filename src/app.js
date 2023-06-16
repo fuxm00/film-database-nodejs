@@ -9,6 +9,7 @@ import {getToWatchByIdAndUser} from "./db/toWatch.js";
 import watchedFilms from "./routes/watchedFilms.js";
 import toWatchFilms from "./routes/toWatchFilms.js";
 import favFilms from "./routes/favFilms.js";
+import {getWatchedByUserAndFilm} from "./db/Watched.js";
 
 export const app = express()
 
@@ -28,12 +29,16 @@ app.get('/', async (req, res) => {
     if (user) {
         for (const film of films) {
             const favouriteFilm = await getFavouriteByIdAndUser(user.id, film.id)
-            const watchedFilm = await getToWatchByIdAndUser(user.id, film.id)
+            const toWatchFilm = await getToWatchByIdAndUser(user.id, film.id)
+            const watchedFilm = await getWatchedByUserAndFilm(user.id, film.id)
 
             film.favourite = !!favouriteFilm;
-            film.toWatch = !!watchedFilm;
+            film.toWatch = !!toWatchFilm;
+            film.watched = !!watchedFilm;
         }
     }
+
+    console.log(films)
 
     res.render('films', {
         title: 'Films',
