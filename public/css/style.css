@@ -208,3 +208,9 @@ body {
 .opacity-30 {
     opacity: 30%;
 }
+
+.input {
+    border-radius: 20px;
+    border: solid black 1px;
+    padding: 5px 0 5px 10px ;
+}
