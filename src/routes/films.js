@@ -76,7 +76,6 @@ films.get('/film/:id', async (req, res) => {
 })
 
 films.post('/add-comment/:id', auth, async (req, res) => {
-    console.log(req.method, req.url)
     const filmId = req.params.id
 
     if (!filmId) return next()

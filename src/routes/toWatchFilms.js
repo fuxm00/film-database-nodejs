@@ -19,8 +19,6 @@ films.get('/to-watch', auth, async (req, res) => {
         film.favourite = !!favouriteFilm;
     }
 
-    console.log(watchedFilms)
-
     res.render('toWatch', {
         title: 'Ke zhlédnutí',
         toWatchFilms,
