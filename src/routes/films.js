@@ -10,6 +10,7 @@ import {getFavouriteByIdAndUser, getFavouritesByFilm} from "../db/favourites.js"
 import {getToWatchByIdAndUser} from "../db/toWatch.js";
 import {getWatchedByUserAndFilm} from "../db/watched.js";
 import {createComment, getCommentsByFilm} from "../db/comments.js";
+import {getAvgRatingByFilm} from "../db/rating.js";
 
 const films = express.Router()
 
@@ -62,6 +63,9 @@ films.get('/film/:id', async (req, res) => {
 
         const favouriteFilms = await getFavouritesByFilm(film.id)
         film.favCount = favouriteFilms.length;
+
+        const avgRating = await getAvgRatingByFilm(film.id)
+        film.avgRating = avgRating;
     }
 
     const comments = await getCommentsByFilm(film.id, 5)

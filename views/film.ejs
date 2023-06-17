@@ -1,7 +1,7 @@
 <%- include('_header') %>
 <%- include('_navbar') %>
 
-<h2>
+<h2 class="mb-5">
     <%= film.title %>
     <%= film.year %>
     <% if (!film.favourite) { %>
@@ -17,6 +17,18 @@
         <% } %>
     <% } %>
 </h2>
+
+<div class="mb-20">
+    Průměr:
+    <% if (film.avgRating === undefined) { %>
+        žádný
+    <% } else { %>
+
+        <% for (let i = 0; i < film.avgRating; i++ ){ %>⭐
+        <% } %>
+
+    <% } %>
+</div>
 
 
 <div class="flex">

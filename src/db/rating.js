@@ -1,4 +1,5 @@
 import db from "../db.js";
+import {sum} from "../utils/sum.js";
 
 export const setRatingByUserAndFilm = async (userId, filmId, rating) => {
 
@@ -26,4 +27,20 @@ export const getRatingByUserAndFilm = async (userId, filmId) => {
 
     return record ? Number(record.rating) : 0
 
+}
+
+export const getAvgRatingByFilm = async (filmId) => {
+
+    const query = await db('rating').select('rating')
+        .where('filmId', filmId)
+
+    const ratings = await query
+
+    if (ratings.length === 0) {
+        return undefined
+    } else if (ratings.length === 1) {
+        return Number(ratings[0].rating)
+    } else {
+        return Number(sum(ratings, 'rating')) / Number(ratings.length)
+    }
 }
