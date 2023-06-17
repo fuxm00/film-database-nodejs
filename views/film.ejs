@@ -1,0 +1,46 @@
+<%- include('_header') %>
+<%- include('_navbar') %>
+
+<h2>
+    <%= film.title %>
+    <%= film.year %>
+    <% if (!film.favourite) { %>
+        <a href="/favourites/<%= film.id %>">🤍</a>
+    <% } else { %>
+        <a href="/remove-favourite/<%= film.id %>">🧡</a>
+    <% } %>
+    <% if (!film.watched) { %>
+        <% if (!film.toWatch) { %>
+            <a href="/add-to-watch/<%= film.id %>">⬜</a>
+        <% } else { %>
+            <a href="/remove-from-to-watch/<%= film.id %>">👀</a>
+        <% } %>
+    <% } %>
+</h2>
+
+
+<div class="flex">
+    <div><img src="/film_covers/<%= film.id %>.jpg" class="film-cover-detail mb-40 ml-30"></div>
+
+    <div class="ml-60 mt-20">
+        <% if (user) { %>
+            <form action='/add-comment/<%= film.id %>' method='post' class="mb-40">
+                <div>
+                    <label>
+                        Text komentáře
+                        <br>
+                        <input type='text' name='text' placeholder='Text'>
+                    </label><br><br>
+                </div>
+                <%- include('_error') %>
+
+                <button type='submit' class="button">Přidat</button>
+            </form>
+        <% } %>
+        <div><%- include('_detailComments') %></div>
+    </div>
+
+</div>
+
+
+<%- include('_footer') %>

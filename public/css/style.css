@@ -1,5 +1,7 @@
 a {
     text-decoration: none;
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -90,15 +92,17 @@ body {
     max-width: 100px;
 }
 
+.film-cover-detail {
+    border-radius: 8px;
+    min-width: 250px;
+}
+
 .film-cover-to-watch {
     border-radius: 8px;
     max-width: 50px;
 }
 
  .film-card {
-     display: flex;
-     flex-direction: column;
-     align-items: center;
      min-width: 200px;
  }
 
@@ -114,6 +118,10 @@ body {
      display: flex;
      flex-direction: column;
      align-items: center;
+ }
+
+ .flex {
+     display: flex;
  }
 
  .film-add-form {
@@ -161,6 +169,18 @@ body {
     margin-left: 30px;
 }
 
+.ml-60 {
+    margin-left: 60px;
+}
+
 .mb-40 {
     margin-bottom: 40px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.mt-20 {
+    margin-top: 20px;
 }

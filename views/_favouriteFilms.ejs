@@ -2,15 +2,20 @@
     <hr>
     <div class="film-container">
 
-        <img src="/film_covers/<%= film.id %>.jpg" class="film-cover">
+        <a href="/film/<%= film.id %>">
+            <img src="/film_covers/<%= film.id %>.jpg" class="film-cover">
+        </a>
+
 
         <div class="film-details">
 
             <div class="ml-30">
                 <a href="/remove-favourite/<%= film.id %>">🧡</a>
             </div>
+            <a href="/film/<%= film.id %>">
+                <div class="ml-30"><%= film.title %></div>
+            </a>
 
-            <div class="ml-30"><%= film.title %></div>
 
             <div class="ml-30">(<%= film.year %>)</div>
 

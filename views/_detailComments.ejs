@@ -1,0 +1,17 @@
+<div>
+    <div class="mb-20">
+        Poslední komentáře:
+    </div>
+    <div class="ml-30">
+        <% if(comments.length >= 1) { %>
+            <% for (const comment of comments) { %>
+                <div class="mb-20">
+                    <div><%= comment.name %> - <%= comment.created %></div>
+                    <div class="ml-30"><%= comment.text %></div>
+                </div>
+            <% } %>
+        <% } else { %>
+            žádné
+        <% } %>
+    </div>
+</div>

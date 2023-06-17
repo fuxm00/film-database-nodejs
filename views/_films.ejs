@@ -1,13 +1,11 @@
 <div class="film-list">
     <% for (const film of films) { %>
-        <div class="film-card">
+        <div class="film-card flex-column-center">
 
-            <div>
-                <%= film.title %>
-                (<%= film.year %>)
-            </div>
-
-            <img src="/film_covers/<%= film.id %>.jpg" class="film-cover">
+            <a href="/film/<%= film.id %>" class="flex-column-center">
+                <%= film.title %> (<%= film.year %>)
+                <img src="/film_covers/<%= film.id %>.jpg" class="film-cover">
+            </a>
 
             <% if (user) { %>
 
@@ -15,7 +13,7 @@
                     <% if (!film.favourite) { %>
                         <%= film.favCount %>x <a href="/favourites/<%= film.id %>">🤍</a>
                     <% } else { %>
-                            <%= film.favCount %>x <a href="/remove-favourite/<%= film.id %>">🧡</a>
+                        <%= film.favCount %>x <a href="/remove-favourite/<%= film.id %>">🧡</a>
                     <% } %>
                     <% if (!film.watched) { %>
                         <% if (!film.toWatch) { %>

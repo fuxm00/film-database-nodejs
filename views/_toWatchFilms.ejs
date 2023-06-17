@@ -1,9 +1,10 @@
-
 <% for (const film of toWatchFilms) { %>
     <hr>
     <div class="film-container">
 
-        <img src="/film_covers/<%= film.id %>.jpg" class="film-cover">
+        <a href="/film/<%= film.id %>">
+            <img src="/film_covers/<%= film.id %>.jpg" class="film-cover">
+        </a>
 
         <div class="film-details">
 
@@ -11,7 +12,10 @@
 
             <a href="/remove-from-to-watch/<%= film.id %>" class="ml-30">❌</a>
 
-            <div class="ml-30"><%= film.title %></div>
+            <a href="/film/<%= film.id %>" class="ml-30">
+                <%= film.title %>
+            </a>
+
 
             <div class="ml-30">(<%= film.year %>)</div>
 
