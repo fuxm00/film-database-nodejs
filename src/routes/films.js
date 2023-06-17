@@ -6,10 +6,8 @@ import {
 import multer from "multer";
 import * as path from "path";
 import auth from "../middlewares/auth.js";
-import {getFavouriteByIdAndUser, getFavouritesByFilm} from "../db/favourites.js";
-import {getToWatchByIdAndUser} from "../db/toWatch.js";
-import {getWatchedByUserAndFilm} from "../db/watched.js";
 import {createComment, getCommentsByFilm} from "../db/comments.js";
+import {loadFilmDetails} from "../utils/loadFilmDetails.js";
 import {getAvgRatingByFilm} from "../db/rating.js";
 
 const films = express.Router()
@@ -41,7 +39,7 @@ films.post('/add', auth, upload.single('image'), async (req, res) => {
     res.redirect('back')
 })
 
-films.get('/film/:id', async (req, res) => {
+films.get('/film/:id', async (req, res, next) => {
 
     const filmId = req.params.id
 
@@ -52,20 +50,9 @@ films.get('/film/:id', async (req, res) => {
     const user = res.locals.user
 
     if (user) {
-        const favouriteFilm = await getFavouriteByIdAndUser(user.id, film.id)
-        film.favourite = !!favouriteFilm;
-
-        const toWatchFilm = await getToWatchByIdAndUser(user.id, film.id)
-        film.toWatch = !!toWatchFilm;
-
-        const watchedFilm = await getWatchedByUserAndFilm(user.id, film.id)
-        film.watched = !!watchedFilm;
-
-        const favouriteFilms = await getFavouritesByFilm(film.id)
-        film.favCount = favouriteFilms.length;
-
-        const avgRating = await getAvgRatingByFilm(film.id)
-        film.avgRating = avgRating;
+        await loadFilmDetails(user.id, film)
+    } else {
+        film.avgRating = await getAvgRatingByFilm(film.id);
     }
 
     const comments = await getCommentsByFilm(film.id, 5)
@@ -79,7 +66,7 @@ films.get('/film/:id', async (req, res) => {
     })
 })
 
-films.post('/add-comment/:id', auth, async (req, res) => {
+films.post('/add-comment/:id', auth, async (req, res, next) => {
     const filmId = req.params.id
 
     if (!filmId) return next()

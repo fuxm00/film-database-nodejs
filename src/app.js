@@ -4,12 +4,11 @@ import users from "./routes/users.js";
 import cookieParser from 'cookie-parser'
 import loadUser from './middlewares/loadUser.js'
 import {getAllFilms} from "./db/films.js";
-import {getFavouriteByIdAndUser, getFavouritesByFilm} from "./db/favourites.js";
-import {getToWatchByIdAndUser} from "./db/toWatch.js";
 import watchedFilms from "./routes/watchedFilms.js";
 import toWatchFilms from "./routes/toWatchFilms.js";
 import favFilms from "./routes/favFilms.js";
-import {getWatchedByUserAndFilm} from "./db/watched.js";
+import {loadFilmDetails} from "./utils/loadFilmDetails.js";
+import {getAvgRatingByFilm} from "./db/rating.js";
 
 export const app = express()
 
@@ -30,17 +29,11 @@ app.get('/', async (req, res) => {
 
     if (user) {
         for (const film of filmsToShow) {
-            const favouriteFilm = await getFavouriteByIdAndUser(user.id, film.id)
-            film.favourite = !!favouriteFilm;
-
-            const toWatchFilm = await getToWatchByIdAndUser(user.id, film.id)
-            film.toWatch = !!toWatchFilm;
-
-            const watchedFilm = await getWatchedByUserAndFilm(user.id, film.id)
-            film.watched = !!watchedFilm;
-
-            const favouriteFilms = await getFavouritesByFilm(film.id)
-            film.favCount = favouriteFilms.length;
+            await loadFilmDetails(user.id, film)
+        }
+    } else {
+        for (const film of filmsToShow) {
+            film.avgRating = await getAvgRatingByFilm(film.id);
         }
     }
 
@@ -49,7 +42,6 @@ app.get('/', async (req, res) => {
         films: filmsToShow,
         marked: 'films'
     })
-
 
 })
 

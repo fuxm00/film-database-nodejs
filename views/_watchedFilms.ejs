@@ -18,37 +18,37 @@
                 <div class="ml-30">
                     <a href="/rated/<%= film.id %>/5">
                         <% if (film.rating > 4) { %>
-                            ⭐
+                            <span>⭐</span>
                         <% } else { %>
-                            ⚪
+                            <span class="opacity-30">⭐</span>
                         <% } %>
                     </a>
                     <a href="/rated/<%= film.id %>/4">
                         <% if (film.rating > 3) { %>
-                            ⭐
+                            <span>⭐</span>
                         <% } else { %>
-                            ⚪
+                            <span class="opacity-30">⭐</span>
                         <% } %>
                     </a>
                     <a href="/rated/<%= film.id %>/3">
                         <% if (film.rating > 2) { %>
-                            ⭐
+                            <span>⭐</span>
                         <% } else { %>
-                            ⚪
+                            <span class="opacity-30">⭐</span>
                         <% } %>
                     </a>
                     <a href="/rated/<%= film.id %>/2">
                         <% if (film.rating > 1) { %>
-                            ⭐
+                            <span>⭐</span>
                         <% } else { %>
-                            ⚪
+                            <span class="opacity-30">⭐</span>
                         <% } %>
                     </a>
                     <a href="/rated/<%= film.id %>/1">
                         <% if (film.rating > 0) { %>
-                            ⭐
+                            <span>⭐</span>
                         <% } else { %>
-                            ⚪
+                            <span class="opacity-30">⭐</span>
                         <% } %>
                     </a>
                 </div>

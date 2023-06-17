@@ -11,7 +11,7 @@
     <% } %>
     <% if (!film.watched) { %>
         <% if (!film.toWatch) { %>
-            <a href="/add-to-watch/<%= film.id %>">⬜</a>
+            <a href="/add-to-watch/<%= film.id %>" class="opacity-30">👀</a>
         <% } else { %>
             <a href="/remove-from-to-watch/<%= film.id %>">👀</a>
         <% } %>

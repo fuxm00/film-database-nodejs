@@ -90,11 +90,17 @@ body {
 .film-cover {
     border-radius: 8px;
     max-width: 100px;
+    border: solid black 1px;
+}
+
+.film-cover:hover {
+    opacity: 60%;
 }
 
 .film-cover-detail {
     border-radius: 8px;
     min-width: 250px;
+    border: solid black 1px;
 }
 
 .film-cover-to-watch {
@@ -187,4 +193,18 @@ body {
 
 .mb-5 {
     margin-bottom: 5px;
+}
+
+.film-card-link {
+    position: relative;
+}
+
+.film-car-rating {
+    position: absolute;
+    top: calc(100% - 18px);
+    font-size: 9pt;
+}
+
+.opacity-30 {
+    opacity: 30%;
 }
