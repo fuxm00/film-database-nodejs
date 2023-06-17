@@ -3,7 +3,7 @@
 
 <h2 class="mb-5">
     <%= film.title %>
-    <%= film.year %>
+    (<%= film.year %>)
     <% if (!film.favourite) { %>
         <a href="/favourites/<%= film.id %>">🤍</a>
     <% } else { %>
