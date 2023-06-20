@@ -1,0 +1,11 @@
+<%- include('_header') %>
+<%- include('_navbar') %>
+
+<h2>Tvoje statistiky</h2>
+<% if (chartData.length >= 1) { %>
+    <%- include('_viewedFilmsByYearsChart') %>
+<% } else { %>
+    <div class="ml-30">žádné</div>
+<% } %>
+
+<%- include('_footer') %>

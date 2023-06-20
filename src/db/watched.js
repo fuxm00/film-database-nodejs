@@ -46,9 +46,9 @@ export const getWatchedByUser = async (id) => {
             'rating.filmId'
         )
 
-    const toWatch = await query
+    const watched = await query
 
-    return toWatch
+    return watched
 }
 
 export const getWatchedByUserAndFilm = async (userId, filmId) => {

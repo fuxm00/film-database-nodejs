@@ -9,6 +9,7 @@ import toWatchFilms from "./routes/toWatchFilms.js";
 import favFilms from "./routes/favFilms.js";
 import {loadFilmDetails} from "./utils/loadFilmDetails.js";
 import {getAvgRatingByFilm} from "./db/rating.js";
+import stats from "./routes/stats.js";
 
 export const app = express()
 
@@ -50,6 +51,7 @@ app.use(favFilms)
 app.use(toWatchFilms)
 app.use(watchedFilms)
 app.use(users)
+app.use(stats)
 
 app.use((req, res) => {
     console.log('404', req.method, req.url)

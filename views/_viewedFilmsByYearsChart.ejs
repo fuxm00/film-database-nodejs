@@ -1,0 +1,65 @@
+<div class="mb-40">
+    <canvas id="filmChart"></canvas>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"
+        integrity="sha512-kdpGWY5wS6yTcqKxo6c14+4nk99hWFTwQ5XtSyELJxVwpWH23MN80iTVzkMg1jv3FZbdKPbFWLr98AA03/zPuA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    const filmChart = document.getElementById('filmChart');
+
+    const years = [<%= chartData.map(item => item.year) %>];
+    const counts = [<%= chartData.map(item => item.count) %>];
+    const colors = Array()
+
+    const max = Math.ceil(Math.max(...counts) * 1.2)
+    const step  = Math.ceil(max / 5)
+
+    const randomRgb = function () {
+        let o = Math.round, r = Math.random, s = 255;
+        return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + (r() * (0.8 - 0.7) + 0.7) + ')';
+    }
+
+    for (let i = 0; i < years.length; i++) {
+        colors.push(randomRgb())
+    }
+
+    new Chart(filmChart, {
+        type: 'bar',
+        data: {
+            labels: years,
+            datasets: [{
+                label: 'Počet filmů',
+                data: counts,
+                borderWidth: 2,
+                borderColor: 'black',
+                backgroundColor: colors,
+                hoverBorderWidth: 5,
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            title: {
+                display: true,
+                text: 'Počet zhlédnutých filmů podle roku vydání'
+            },
+            scales: {
+                xAxes: [{
+                    gridLines: {
+                        color: "rgba(0, 0, 0, 0)",
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                        max: max,
+                        stepSize: step
+                    }
+                }]
+            }
+        },
+    });
+</script>
