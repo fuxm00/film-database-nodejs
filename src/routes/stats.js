@@ -1,9 +1,10 @@
 import express from "express";
 import {getWatchedByUser} from "../db/watched.js";
+import auth from "../middlewares/auth.js";
 
 const stats = express.Router()
 
-stats.get('/stats/', async (req, res, next) => {
+stats.get('/stats/', auth,  async (req, res, next) => {
 
     const user = res.locals.user
 
