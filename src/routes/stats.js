@@ -4,7 +4,7 @@ import auth from "../middlewares/auth.js";
 
 const stats = express.Router()
 
-stats.get('/stats/', auth,  async (req, res, next) => {
+stats.get('/stats/', auth,  async (req, res) => {
 
     const user = res.locals.user
 

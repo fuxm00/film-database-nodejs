@@ -6,7 +6,7 @@
 
                 <%= film.title %> (<%= film.year %>)
 
-                <img src="/film_covers/<%= film.id %>.jpg" class="film-cover">
+                <img src="/film_covers/<%= film.coverFileName %>" class="film-cover">
 
                 <div class="film-car-rating">
                     <% for (let i = 0; i < film.avgRating; i++ )
